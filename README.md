@@ -68,12 +68,13 @@ row on the same footing.
   the row. Cline also holds ~1.8 s of *request-free* time at the end of the run before exiting — 33–43%
   of its whole CU, because the CPU stops there while ~700 MB of RSS stays resident (the same lesson as
   Codex's 10 s exit wait: an idle tail is not free).
-- **Kimi Code is the fastest harness here end-to-end** — 3.5–3.8 s for the same 100-round script, with
-  only ~2.5 s of that in the running segment — but it is not the leanest: it holds ~490 MB of RSS on
-  average (~600 MB peak) and runs multi-threaded (mean ~65% of a core, peaks above 170%), so its CU
-  (4.36) lands between Cline and Antigravity CLI. Its shell commands are children of the measured root,
-  so their ~0.24 core-seconds per run are captured through the child-process counters (the channel Cline's
-  grandchildren escape).
+- **Kimi Code runs the same 100-round script in 3.5–3.8 s** (only ~2.5 s of that in the running
+  segment) — a fast cohort together with Cline, though durations are not comparable across batches
+  (peri's whole run was 2.2 s under a different batch's load). It is not the leanest, though: it holds
+  ~490 MB of RSS on average (~600 MB peak, third-highest mean in the table) and runs multi-threaded
+  (mean ~65% of a core, peaks above 170%, second-highest peak), so its CU (4.36) lands between Cline and
+  Antigravity CLI. Its shell commands are children of the measured root, so their ~0.24 core-seconds per
+  run are captured through the child-process counters (the channel Cline's grandchildren escape).
 - **Only CU is comparable across batches.** Durations are load-sensitive — the same script on the same
   machine has produced 19.8 s and 34.7 s for one harness — and any relative score is computed inside a
   single batch by construction.
